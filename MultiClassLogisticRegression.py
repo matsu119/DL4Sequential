@@ -3,6 +3,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation
 from keras.optimizers import SGD
 from sklearn.utils import shuffle
+import matplotlib.pyplot as plt
 
 M = 2 # 入力データの次元
 K = 3 # クラス数
@@ -31,6 +32,7 @@ model.compile(loss='categorical_crossentropy', optimizer=SGD(lr=0.1))
 minibatch_size = 50
 model.fit(X, Y, epochs=20, batch_size=minibatch_size)
 
+# 結果確認
 X_, Y_=shuffle(X, Y)
 classes = model.predict_classes(X_[0:10], batch_size=minibatch_size)
 prob = model.predict_proba(X_[0:10], batch_size=1)
@@ -40,3 +42,18 @@ print(np.argmax(model.predict(X_[0:10]), axis=1) == classes)
 print()
 print('output probability:')
 print(prob)
+
+# グラフ描画
+print(model.get_weights())
+w = model.get_weights()[0]
+b = model.get_weights()[1]
+
+def border(x, c1, c2):
+    return((w[0, c1] - w[0, c2]) * x - b[c1] + b[c2]) / (w[1, c2] - w[1, c1])
+
+plt.plot(X1[:, 0], X1[:, 1], "o")
+plt.plot(X2[:, 0], X2[:, 1], "o")
+plt.plot(X3[:, 0], X3[:, 1], "o")
+plt.plot([-2, 5], [border(-2, 0, 1), border(5, 0, 1)])
+plt.plot([-2, 12], [border(-2, 1, 2), border(12, 1, 2)])
+plt.show()
