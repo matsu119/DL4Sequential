@@ -10,7 +10,7 @@ X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
 Y = np.array([[0], [1], [1], [0]])
 
 model = Sequential([
-    Dense(input_dim=2, output_dim=1),
+    Dense(input_dim=2, units=1),
     Activation('sigmoid')
 ])
 model.compile(loss='binary_crossentropy', optimizer=SGD(lr=0.1))
