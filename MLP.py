@@ -23,22 +23,9 @@ model.fit(X, Y, epochs=4000, batch_size=4)
 classes = model.predict_classes(X, batch_size=4)
 prob = model.predict_proba(X, batch_size=4)
 
+# 結果はうまくいったりいかなかったり
 print('classified:')
 print(Y == classes)
 print()
 print('output probability:')
 print(prob)
-
-'''
-結果：
-classified:
-[[ True]
- [ True]
- [False]
- [False]]
-output probability:
-[[0.49206045]
- [0.52958643]
- [0.48314384]
- [0.5077603 ]]
-'''
