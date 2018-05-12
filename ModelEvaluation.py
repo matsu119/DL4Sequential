@@ -2,7 +2,8 @@ from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense, Activation
-from keras.optimizers import SGD
+# from keras.optimizers import SGD
+from keras.optimizers import adam
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -23,9 +24,9 @@ model.add(Dense(3, input_dim=2))
 model.add(Activation('sigmoid'))
 model.add(Dense(1))
 model.add(Activation('sigmoid'))
-model.compile(loss='binary_crossentropy', optimizer=SGD(lr=0.05), metrics=['accuracy'])
+model.compile(loss='binary_crossentropy', optimizer=adam(lr=0.05), metrics=['accuracy'])
 
-model.fit(X_train, y_train, epochs=500, batch_size=20)
+model.fit(X_train, y_train, epochs=1000, batch_size=20)
 
 loss_and_metrics = model.evaluate(X_test, y_test)
 
